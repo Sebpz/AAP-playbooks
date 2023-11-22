@@ -1,0 +1,31 @@
+---
+- name: Check Resource Availability
+  hosts: web_servers
+  gather_facts: true  # Ansible will gather facts about the hosts
+
+  tasks:
+    - name: Check Free Memory
+      ansible.builtin.debug:
+        msg: "Free Memory on {{ inventory_hostname }} is {{ ansible_facts['memory']['free_mb'] }} MB"
+
+    - name: Check Free Disk Space
+      ansible.builtin.debug:
+        msg: "Free Disk Space on {{ inventory_hostname }} is {{ ansible_facts['ansible_mounts'][0]['free'] }}"
+
+    - name: Check CPU Usage
+      ansible.builtin.debug:
+        msg: "CPU Usage on {{ inventory_hostname }} is {{ ansible_facts['ansible_processor_percent']['idle'] }}% idle"
+
+    - name: Check Network Interfaces
+      ansible.builtin.debug:
+        msg: "Network Interfaces on {{ inventory_hostname }}: {{ ansible_facts['ansible_interfaces'] }}"
+        
+    - name: Check Disk Usage
+      ansible.builtin.debug:
+        msg: "Disk Usage on {{ inventory_hostname }}: {{ ansible_facts['ansible_mounts'] }}"
+        
+    - name: Check Swap Space
+      ansible.builtin.debug:
+        msg: "Swap Space on {{ inventory_hostname }} is {{ ansible_facts['ansible_swaptotal_mb'] }} MB (Total) and {{ ansible_facts['ansible_swapfree_mb'] }} MB (Free)"
+
+    

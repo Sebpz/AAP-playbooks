@@ -1,6 +1,6 @@
 ---
 - name: Check Resource Availability
-  hosts: servers
+  hosts: all
   gather_facts: true  # Ansible will gather facts about the hosts
 
   tasks:
